@@ -20,7 +20,7 @@ namespace eft_dma_radar
             TextSize = 13,
             TextEncoding = SKTextEncoding.Utf8,
             IsAntialias = true,
-            Typeface = SKTypeface.FromFamilyName("Arial"),
+            Typeface = FontHelper.ChineseTypeface,
             FilterQuality = SKFilterQuality.High
         };
 
@@ -32,7 +32,7 @@ namespace eft_dma_radar
             TextSize = 13,
             TextEncoding = SKTextEncoding.Utf8,
             IsAntialias = true,
-            Typeface = SKTypeface.FromFamilyName("Arial"),
+            Typeface = FontHelper.ChineseTypeface,
             FilterQuality = SKFilterQuality.High
         };
 
@@ -52,7 +52,7 @@ namespace eft_dma_radar
             TextSize = 12,
             TextEncoding = SKTextEncoding.Utf8,
             IsAntialias = true,
-            Typeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold),
+            Typeface = FontHelper.ChineseTypeface,
             FilterQuality = SKFilterQuality.High
         };
 
@@ -83,7 +83,7 @@ namespace eft_dma_radar
             TextSize = 13,
             TextEncoding = SKTextEncoding.Utf8,
             IsAntialias = true,
-            Typeface = SKTypeface.FromFamilyName("Arial"),
+            Typeface = FontHelper.ChineseTypeface,
             FilterQuality = SKFilterQuality.High
         };
 
@@ -95,7 +95,7 @@ namespace eft_dma_radar
             TextSize = 13,
             TextEncoding = SKTextEncoding.Utf8,
             IsAntialias = true,
-            Typeface = SKTypeface.FromFamilyName("Arial"),
+            Typeface = FontHelper.ChineseTypeface,
             FilterQuality = SKFilterQuality.High
         };
 

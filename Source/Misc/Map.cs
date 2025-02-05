@@ -93,6 +93,7 @@ namespace eft_dma_radar
         {
             var paint = Extensions.GetEntityPaint(exfil);
             var text = Extensions.GetTextPaint(exfil);
+            text.Typeface = FontHelper.ChineseTypeface;
             var heightDiff = this.Height - localPlayerHeight;
 
             if (heightDiff > 2) // exfil is above player
@@ -127,6 +128,7 @@ namespace eft_dma_radar
         {
             var paint = Extensions.GetEntityPaint(transit);
             var text = Extensions.GetTextPaint(transit);
+            text.Typeface = FontHelper.ChineseTypeface;
             var heightDiff = this.Height - localPlayerHeight;
 
             if (heightDiff > 2) // transit is above player
@@ -214,6 +216,7 @@ namespace eft_dma_radar
         {
             var paint = Extensions.GetEntityPaint(item);
             var text = Extensions.GetTextPaint(item);
+            text.Typeface = FontHelper.ChineseTypeface;
             var label = _config.LootValue ? item.GetFormattedValueShortName() : item.Item.shortName;
 
             if (heightDiff > 2)
@@ -244,6 +247,7 @@ namespace eft_dma_radar
         {
             var paint = Extensions.GetEntityPaint(container);
             var text = Extensions.GetTextPaint(container);
+            text.Typeface = FontHelper.ChineseTypeface;
             var label = container.Name;
 
             if (heightDiff > 1.45)
@@ -314,6 +318,7 @@ namespace eft_dma_radar
             var label = item.Name;
             var paint = Extensions.GetEntityPaint(item);
             var text = Extensions.GetTextPaint(item);
+            text.Typeface = FontHelper.ChineseTypeface;
 
             if (heightDiff > 2) // loot is above player
             {
@@ -345,6 +350,7 @@ namespace eft_dma_radar
             var label = zone.ObjectiveType;
             var paint = Extensions.GetEntityPaint(zone);
             var text = Extensions.GetTextPaint(zone);
+            text.Typeface = FontHelper.ChineseTypeface;
 
             if (heightDiff > 2) // above player
             {
@@ -408,6 +414,8 @@ namespace eft_dma_radar
 
             var text = Extensions.PlayerTypeTextPaints[type];
             var flagsText = Extensions.PlayerTypeFlagTextPaints[type];
+            text.Typeface = FontHelper.ChineseTypeface;
+            flagsText.Typeface = FontHelper.ChineseTypeface;
             var textOutline = Extensions.GetTextOutlinePaint();
 
             if (mouseoverGrp is not null && mouseoverGrp == player.GroupID)
@@ -601,7 +609,9 @@ namespace eft_dma_radar
 
             var y = bottom - (padding * 2.2f);
 
-            canvas.DrawText(lootItem.GetFormattedValueName(), left + padding, y, Extensions.GetTextPaint(lootItem));
+            var tooltipPaint = Extensions.GetTextPaint(lootItem);
+            tooltipPaint.Typeface = FontHelper.ChineseTypeface;
+            canvas.DrawText(lootItem.GetFormattedValueName(), left + padding, y, tooltipPaint);
         }
 
         /// <summary>
@@ -663,19 +673,25 @@ namespace eft_dma_radar
                     {
                         if (lootItem.AlwaysShow || lootItem.Important || (!_config.ImportantLootOnly && _config.SubItems && lootItem.Value > _config.MinSubItemValue))
                         {
-                            canvas.DrawText("   " + lootItem.GetFormattedValueName(), left + padding, y, Extensions.GetTextPaint(lootItem));
+                            var subItemPaint = Extensions.GetTextPaint(lootItem);
+                            subItemPaint.Typeface = FontHelper.ChineseTypeface;
+                            canvas.DrawText("   " + lootItem.GetFormattedValueName(), left + padding, y, subItemPaint);
                             y -= textSpacing;
                         }
                     }
                 }
 
-                canvas.DrawText(gearItem.Item.GetFormattedTotalValueName(), left + padding, y, Extensions.GetTextPaint(gearItem.Item));
+                var mainPaint = Extensions.GetTextPaint(gearItem.Item);
+                mainPaint.Typeface = FontHelper.ChineseTypeface;
+                canvas.DrawText(gearItem.Item.GetFormattedTotalValueName(), left + padding, y, mainPaint);
                 y -= textSpacing;
             }
 
             if (!isEmptyCorpseName)
             {
-                canvas.DrawText(corpse.Name, left + padding, y, SKPaints.TextBase);
+                var corpsePaint = SKPaints.TextBase.Clone();
+                corpsePaint.Typeface = FontHelper.ChineseTypeface;
+                canvas.DrawText(corpse.Name, left + padding, y, corpsePaint);
                 y -= textSpacing;
             }
         }
@@ -760,9 +776,12 @@ namespace eft_dma_radar
             canvas.DrawRect(backgroundRect, SKPaints.PaintTransparentBacker);
 
             var y = bottom - (padding * 1.5f);
+            using var finalPaint = SKPaints.TextBase.Clone();
+            finalPaint.Typeface = FontHelper.ChineseTypeface;
+            
             foreach (var line in lines)
             {
-                canvas.DrawText(line, left + padding, y, SKPaints.TextBase);
+                canvas.DrawText(line, left + padding, y, finalPaint);
                 y -= textSpacing;
             }
         }
